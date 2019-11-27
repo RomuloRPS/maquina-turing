@@ -1,9 +1,98 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Tab Three
+  <ion-toolbar color="primary">
+    <ion-title size="large">
+      <strong>Maquina de Turing</strong>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <!-- <div class="machine">
+        <ion-icon color="primary" name="outlet"></ion-icon>
+  
+    </div> -->
+  <ion-card>
+    <ion-item>
+      <!-- <ion-label>Estado {{states[stateId].id}}: </ion-label> -->
+      <ion-label>Fita: </ion-label>
+      <ion-input type="text" [(ngModel)]="ribbon"></ion-input>
+    </ion-item>
+  </ion-card>
+
+
+
+
+  <ion-card color="light">
+
+
+
+    <ion-item color="dark">
+      <!-- <ion-label>Estado {{states[stateId].id}}: </ion-label> -->
+      <ion-label>Estado: </ion-label>
+      <ion-select (ionChange)="checkState();" interface="popover" [(ngModel)]="stateId">
+        <div *ngFor="let state of states">
+          <ion-select-option value="{{state.id}}">{{state.name}}</ion-select-option>
+        </div>
+        <ion-select-option value="-1">Adicionar Estado...</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+
+    <ng-container *ngIf="states[stateId]">
+      <div *ngFor="let symbol of symbols">
+        <ion-card color="medium">
+          <ion-card-header>
+
+            <ion-card-title>Ao ler: {{symbol.name}}</ion-card-title>
+          </ion-card-header>
+          <ion-list>
+
+            <ion-item>
+              <ion-label>Direção: </ion-label>
+              <ion-select interface="popover" [(ngModel)]="states[stateId].read[symbol.id].action">
+                <ion-select-option value="left">Esquerda</ion-select-option>
+                <ion-select-option value="right">Direita</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+
+
+            <ion-item>
+              <ion-label>Escreve: </ion-label>
+              <ion-select (ionChange)="checkSymbol(symbol.id);" interface="popover"
+                [(ngModel)]="states[stateId].read[symbol.id].symbolId">
+                <div *ngFor="let symbol of symbols">
+                  <ion-select-option value="{{symbol.id}}">{{symbol.name}}</ion-select-option>
+                </div>
+                <ion-select-option value="-1">Adicionar Variável...</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Vai para: </ion-label>
+              <ion-select (ionChange)="checkToState();" interface="popover"
+                [(ngModel)]="states[stateId].read[symbol.id].toState">
+                <div *ngFor="let state of states">
+                  <ion-select-option value="{{state.id}}">{{state.name}}</ion-select-option>
+
+                </div>
+                <ion-select-option value="-1">Adicionar Estado...</ion-select-option>
+
+              </ion-select>
+            </ion-item>
+          </ion-list>
+
+        </ion-card>
+
+      </div>
+    </ng-container>
+  </ion-card>
+
+
+
+
+
+  <div class="ion-padding">
+    <ion-button (click)="execute()" expand="block" type="submit" class="ion-no-margin">Executar</ion-button>
+  </div>
+</ion-content>

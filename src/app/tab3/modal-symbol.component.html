@@ -1,0 +1,7 @@
+    
+
+    <ion-item *ngIf="type == 'symbol' || type == 'toState'" ><ion-label >Símbolo: </ion-label><ion-input [(ngModel)]= "symbol" ></ion-input></ion-item>
+    
+    <ion-item *ngIf="type == 'state'" ><ion-label >Estado: </ion-label><ion-input type="number" [(ngModel)]= "symbol" ></ion-input></ion-item>
+
+    <ion-button (click)="addSymbol()" expand="block">Adicionar</ion-button>

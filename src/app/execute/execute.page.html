@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+    <ion-title size="large">
+      <strong>Maquina de Turing</strong>
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header color="medium">
+      <ion-title><strong>Informações</strong></ion-title>
+    </ion-card-header>
+    <ion-list>
+      <ion-item>
+        <ion-label>
+          Entrada: ->
+        </ion-label>
+        <ion-input slot="end" [(ngModel)]="originalRibbon"></ion-input>
+      </ion-item>
+
+    </ion-list>
+      <ion-button *ngIf="!running"  expand="block" (click)="prepareExecute()"><ion-icon slot="start" name="play"></ion-icon><strong>Executar</strong></ion-button>
+      <ion-button *ngIf="running" color="danger" expand="block" fill="outline" (click)="stopExecution()"><ion-icon slot="start" name="hand"></ion-icon><strong>Parar</strong></ion-button>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color="medium">
+      <ion-toolbar color="medium">
+        <ion-icon slot="start" size="large" name="list"></ion-icon>
+        <ion-title><strong>Lista de Execução</strong></ion-title>
+      </ion-toolbar>
+
+    </ion-card-header>
+    <ion-list>
+      <ng-container *ngFor="let char of ribbon; let index = index">
+        <ion-item *ngIf="index != i">
+          <ion-icon slot="start" name="square"></ion-icon>
+          <ion-label slot="end">
+            <h1><strong>{{char}}</strong></h1>
+          </ion-label>
+        </ion-item>
+        <ion-item *ngIf="index == i" color="primary">
+          <ion-icon slot="start" name="square"></ion-icon>
+          <ion-label slot="end">
+            <h1><strong>{{char}}</strong></h1>
+          </ion-label>
+        </ion-item>
+      </ng-container>
+
+
+    </ion-list>
+  </ion-card>
+
+</ion-content>

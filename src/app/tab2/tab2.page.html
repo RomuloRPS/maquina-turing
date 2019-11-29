@@ -1,9 +1,53 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Tab Two
+  <ion-toolbar color="primary">
+    <ion-title size="large">
+      <strong>Exemplos</strong>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+
+  <ion-row>
+    <ion-col size="6">
+      <ion-card color="primary" style="text-align: center;">
+          <ion-card-header >
+              <ion-icon size="large" name="add"></ion-icon>
+          </ion-card-header>
+          <h1><strong>Soma</strong></h1>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-card (click)="sub()" color="primary" style="text-align: center;">
+        <ion-card-header >
+            <ion-icon size="large" name="remove"></ion-icon>
+        </ion-card-header>
+        <h1><strong>Subtração</strong></h1>
+      </ion-card>
+    </ion-col>
+
+  </ion-row>
+
+  <ion-row>
+      <ion-col size="6">
+        <ion-card color="primary" style="text-align: center;">
+            <ion-card-header >
+                <ion-icon size="large" name="logo-buffer"></ion-icon>
+            </ion-card-header>
+            <h1><strong>Multiplicação</strong></h1>
+        </ion-card>
+      </ion-col>
+  
+      <ion-col size="6">
+        <ion-card color="primary" style="text-align: center;">
+          <ion-card-header >
+              <ion-icon size="large" name="albums"></ion-icon>
+          </ion-card-header>
+          <h1><strong>Divisão</strong></h1>
+        </ion-card>
+      </ion-col>
+  
+    </ion-row>
+
+</ion-content>

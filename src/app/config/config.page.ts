@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalSymbolComponent } from './modal-symbol.component';
 import { PopoverController, ToastController } from '@ionic/angular';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-tab3',
-  templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss']
+  selector: 'app-config',
+  templateUrl: 'config.page.html',
+  styleUrls: ['config.page.scss']
 })
-export class Tab3Page {
+export class ConfigPage implements OnInit {
 
   public states = [
     {
@@ -32,6 +34,11 @@ export class Tab3Page {
           toState: null,
           symbolId: '',
         },
+        {
+          action: -1,
+          toState: null,
+          symbolId: '',
+        },
 
       ]
     }
@@ -49,6 +56,10 @@ export class Tab3Page {
     {
       id: 2,
       name: "_"
+    },
+    {
+      id: 3,
+      name: "FIM"
     }
   ]
   private symbolId
@@ -56,14 +67,106 @@ export class Tab3Page {
 
   private currentSymbol;
 
-  public ribbon;
-  constructor(public popoverController: PopoverController, private toastController: ToastController) {
-
+  public ribbon = "";
+  
+  constructor(public popoverController: PopoverController, private toastController: ToastController, private router: Router) {
+    
 
   }
 
-  execute() {
-    console.log(this.states);
+  ngOnInit(){
+    this.states =JSON.parse( localStorage.getItem('states'));
+    this.symbols =JSON.parse( localStorage.getItem('symbols'));
+  }
+
+  async execute() {
+    if(!this.ribbon){
+      const toast = await this.toastController.create({
+        message: 'Não foi possível executar, preencha a fita corretamente!',
+        position: 'top',
+        color: 'danger',
+        duration: 2000,
+        showCloseButton: true,
+        closeButtonText: 'Ok'
+      });
+      toast.present(); 
+      return;
+    }
+    localStorage.setItem('symbols', JSON.stringify(this.symbols));
+    localStorage.setItem('states', JSON.stringify(this.states));
+    localStorage.setItem('ribbon', this.ribbon);
+    this.router.navigate(['/execute']);
+    
+  }
+
+  async removeAll(){
+    this.states = [
+      {
+        id: '0',
+        name: '0',
+  
+        read: [
+          {
+            action: -1,
+            toState: null,
+            symbolId: '',
+  
+          },
+          {
+            action: -1,
+            toState: null,
+            symbolId: '',
+  
+          },
+          {
+            action: -1,
+            toState: null,
+            symbolId: '',
+          },
+          {
+            action: -1,
+            toState: null,
+            symbolId: '',
+          },
+  
+        ]
+      }
+    ]
+  
+    this.symbols = [
+      {
+        id: 0,
+        name: "->"
+      },
+      {
+        id: 1,
+        name: "*"
+      },
+      {
+        id: 2,
+        name: "_"
+      },
+      {
+        id: 3,
+        name: "FIM"
+      }
+    ]
+
+    this.symbolId
+    this.stateId = '0';
+  
+    this.ribbon = "";
+
+    const toast = await this.toastController.create({
+      message: 'Os estados foram apagados!',
+      position: 'top',
+      color: 'success',
+      duration: 2000,
+      showCloseButton: true,
+      closeButtonText: 'Ok'
+    });
+    toast.present();
+    
   }
 
 
@@ -158,7 +261,7 @@ export class Tab3Page {
     }
   }
 
-  
+
   async addState(state, type) {
     let statesSize = this.states.length
     let newState = {
@@ -202,10 +305,6 @@ export class Tab3Page {
       this.stateId = alreadyExist.id;
       toast.present();
     } else {
-
-      if (type == 'toState') {
-        this.states[this.stateId].toState = newState.id;
-      }
 
       this.states.push(newState);
       this.stateId = newState.id;

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title size="large">
-      <strong>Maquina de Turing</strong>
+      <strong>Configuração</strong>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -14,10 +14,22 @@
   <ion-card>
     <ion-item>
       <!-- <ion-label>Estado {{states[stateId].id}}: </ion-label> -->
-      <ion-label>Fita: </ion-label>
+      <ion-label>Fita: -></ion-label>
       <ion-input type="text" [(ngModel)]="ribbon"></ion-input>
     </ion-item>
   </ion-card>
+
+  <ion-row>
+    <ion-col size="6">
+        
+    </ion-col>
+    
+    <ion-col size="6" style="text-align: right;">
+        <ion-button (click)="removeAll()" color="danger"><ion-icon slot="start" name="trash"></ion-icon>Apagar tudo</ion-button>
+    </ion-col>
+
+  </ion-row>
+
 
 
 
@@ -40,7 +52,7 @@
 
     <ng-container *ngIf="states[stateId]">
       <div *ngFor="let symbol of symbols">
-        <ion-card color="medium">
+        <ion-card *ngIf="symbol.name != 'FIM'" color="medium">
           <ion-card-header>
 
             <ion-card-title>Ao ler: {{symbol.name}}</ion-card-title>
@@ -70,7 +82,7 @@
 
             <ion-item>
               <ion-label>Vai para: </ion-label>
-              <ion-select (ionChange)="checkToState();" interface="popover"
+              <ion-select (ionChange)="checkToState(symbol.id);" interface="popover"
                 [(ngModel)]="states[stateId].read[symbol.id].toState">
                 <div *ngFor="let state of states">
                   <ion-select-option value="{{state.id}}">{{state.name}}</ion-select-option>

@@ -1,15 +1,16 @@
 
 # Passos para instalação
 
-# baixar node - sudo apt-get install nodejs
-# baixar npm - sudo apt-get install npm
+1 - baixar node - sudo apt-get install nodejs
 
-# Clonar projeto
+2 - baixar npm - sudo apt-get install npm
 
-# Apos clonar acessar pasta e abrir terminal
+3 - Clonar projeto
 
-# Rodar - npm install 
-  Será baixado as dependencias
+4 - Apos clonar acessar pasta e abrir terminal
 
-# Rodar - ionic serve 
-  O projeto estará rodando em http://localhost:8100/
+5 - Rodar - npm install 
+    Será baixado as dependencias
+
+6 - Rodar - ionic serve 
+    O projeto estará rodando em http://localhost:8100/

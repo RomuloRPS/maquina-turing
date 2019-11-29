@@ -9,8 +9,6 @@
 
 4 - Apos clonar acessar pasta e abrir terminal
 
-5 - Rodar - npm install 
-    Será baixado as dependencias
+5 - Rodar - npm install - Será baixado as dependencias
 
-6 - Rodar - ionic serve 
-    O projeto estará rodando em http://localhost:8100/
+6 - Rodar - ionic serve - O projeto estará rodando em http://localhost:8100/
